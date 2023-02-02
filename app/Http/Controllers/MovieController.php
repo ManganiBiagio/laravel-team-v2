@@ -36,7 +36,12 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=$request->all();
+        $movie=new Movie();
+        $movie->title=$data['title'];
+        $movie->description=$data['description'];
+        $movie->save();
+        return redirect()->route('movies.show',compact('movie'));
     }
 
     /**
@@ -47,7 +52,7 @@ class MovieController extends Controller
      */
     public function show(Movie $movie)
     {
-        //
+        return view('movies.show',compact('movie'));
     }
 
     /**
@@ -58,7 +63,7 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie)
     {
-        //
+        return view('movies.edit',compact('movie'));
     }
 
     /**
@@ -70,7 +75,11 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
-        //
+        $data=$request->all();
+        $movie->title=$data['title'];
+        $movie->description=$data['description'];
+        $movie->save();
+        return redirect()->route('movies.show',compact('movie'));
     }
 
     /**
@@ -81,6 +90,7 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
-        //
+        $movie->delete();
+        return redirect()->route('movies.index');
     }
 }
