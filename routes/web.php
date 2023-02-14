@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ActorController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Actor;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +34,5 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 Route::resource('movies', MovieController::class);
+Route::resource("actors",ActorController::class);
+
