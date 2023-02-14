@@ -17,12 +17,12 @@ class MoviesTableSeeder extends Seeder
     {
         for($i = 0; $i < 15; $i++){
             $newMovie = new Movie();
-            $newMovie->original_title = "sd";
+           
             $newMovie->title = "sd";
-            $newMovie->nationality = "sd";
-            $newMovie->publish_date = "2023-01-23";
-            $newMovie->vote = 6;
-            $newMovie->img = "sadjkh";
+            $newMovie->genre = "sd";
+            $newMovie->description = "dssdadsadsa";
+            $newMovie->director = "sadjkh";
+            $newMovie->release_date = "23/10/12";
             $newMovie->save();
         }
     }

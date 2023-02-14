@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Actor;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return view("movies.create");
+        $actors=Actor::all();
+        return view("movies.create",compact("actors"));
     }
 
     /**
@@ -40,7 +42,9 @@ class MovieController extends Controller
         $movie=new Movie();
         $movie->title=$data['title'];
         $movie->description=$data['description'];
+        $movie->release_date=$data["release_date"];
         $movie->save();
+        $movie->actors()->attach($data["actors"]);
         return redirect()->route('movies.show',compact('movie'));
     }
 
@@ -63,7 +67,8 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie)
     {
-        return view('movies.edit',compact('movie'));
+        $actors=Actor::all();
+        return view('movies.edit',compact('movie',"actors"));
     }
 
     /**
@@ -75,9 +80,11 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
+        
         $data=$request->all();
         $movie->title=$data['title'];
         $movie->description=$data['description'];
+        $movie->actors()->sync($data["actors"]);
         $movie->save();
         return redirect()->route('movies.show',compact('movie'));
     }
@@ -90,6 +97,7 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
+        $movie->actors()->detach();
         $movie->delete();
         return redirect()->route('movies.index');
     }

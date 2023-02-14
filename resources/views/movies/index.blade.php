@@ -9,9 +9,14 @@
                     <div class="card-body">
                         <div class="card-title">{{$movie->name}}</div>
                         <div class="card-text">{{$movie->description}}</div>
-                        <a method='delete' href="{{ route('movies.destroy', $movie->id) }}" class="btn btn-danger">
-                            Delete
-                        </a>
+                        <form action="{{ route('movies.destroy', $movie->id) }}"  method="POST">
+                            @csrf
+                            @method("DELETE")
+                        <button class="btn btn-danger"> 
+                            elimina                          
+                            
+                        </button>
+                    </form>
                         <a href="{{ route('movies.show', $movie->id) }}" class="btn btn-primary">
                             Show
                         </a>
